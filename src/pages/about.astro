@@ -40,10 +40,11 @@ import { site, team } from '../data/site';
     gap: 1.5rem;
   }
   .card {
-    background: var(--white);
+    background: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+    border-radius: 4px;
+    padding: 12px 12px 0;
+    box-shadow: 4px 5px 0 rgb(43 34 25 / 0.1);
   }
   .card img {
     width: 100%;
@@ -52,8 +53,7 @@ import { site, team } from '../data/site';
     object-position: top;
   }
   .card__body {
-    padding: 1.25rem 1.4rem 1.5rem;
-    border-top: 4px solid var(--amber-400);
+    padding: 1rem 0.3rem 1.3rem;
   }
   .card h2 {
     font-size: 1.55rem;

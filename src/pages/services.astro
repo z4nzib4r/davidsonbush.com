@@ -63,19 +63,19 @@ import { site, services } from '../data/site';
     align-items: center;
     gap: 0.45rem;
     padding: 0.55rem 1rem;
-    border-radius: 999px;
-    border: 1px solid rgb(255 255 255 / 0.25);
-    color: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgb(244 236 221 / 0.35);
+    color: var(--cream);
     text-decoration: none;
     font-weight: 600;
   }
   .jump a:hover {
-    background: rgb(255 255 255 / 0.1);
+    background: rgb(244 236 221 / 0.1);
   }
   .jump :global(svg) {
     width: 1.1rem;
     height: 1.1rem;
-    color: var(--amber-400);
+    color: var(--mustard);
   }
   .list {
     padding-block: clamp(32px, 5vw, 64px);
@@ -99,33 +99,35 @@ import { site, services } from '../data/site';
   .row__icon {
     width: 72px;
     height: 72px;
-    border-radius: 20px;
+    border-radius: 50%;
     display: grid;
     place-items: center;
-    background: var(--blue-100);
-    color: var(--blue-600);
+    background: var(--water-bg);
+    color: var(--water);
   }
   .row__icon :global(svg) {
     width: 38px;
     height: 38px;
   }
   .row__icon--heating {
-    background: #fde7df;
-    color: #d94a20;
+    background: var(--heat-bg);
+    color: var(--heat);
   }
   .row__icon--cooling {
-    background: #def3fc;
-    color: #1683b8;
+    background: var(--cool-bg);
+    color: var(--cool);
   }
   .row__icon--boilers {
-    background: #e0efe6;
-    color: var(--green-700);
+    background: var(--boil-bg);
+    color: var(--moss);
   }
   .row__num {
     font-family: var(--font-display);
-    font-weight: 800;
-    color: var(--ink-soft);
-    letter-spacing: 0.1em;
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--rust-600);
   }
   .row__body h2 {
     margin-bottom: 0.3em;
@@ -142,7 +144,7 @@ import { site, services } from '../data/site';
     display: flex;
     gap: 0.6rem;
     align-items: center;
-    background: var(--white);
+    background: var(--card);
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 0.75rem 1rem;
@@ -151,12 +153,12 @@ import { site, services } from '../data/site';
   .row__items :global(svg) {
     width: 1.15rem;
     height: 1.15rem;
-    color: var(--blue-600);
-    stroke-width: 2.6;
+    color: var(--green-600);
+    stroke-width: 2.8;
     flex: none;
   }
   .brands {
-    background: var(--sky-50);
+    background: var(--cream-2);
     border-top: 1px solid var(--line);
     padding-block: clamp(48px, 7vw, 80px);
   }
@@ -179,15 +181,16 @@ import { site, services } from '../data/site';
     gap: 0.75rem;
   }
   .brands li {
-    background: var(--white);
+    background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1rem 1.5rem;
     font-family: var(--font-display);
-    font-weight: 800;
-    font-stretch: 90%;
-    font-size: 1.35rem;
-    color: var(--navy-700);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--green-700);
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
   }
   @media (max-width: 860px) {
     .row {

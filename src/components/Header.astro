@@ -61,13 +61,12 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgb(250 248 243 / 0.92);
-    backdrop-filter: saturate(1.4) blur(10px);
-    border-bottom: 1px solid var(--line);
+    background: var(--cream);
+    border-bottom: 2px solid var(--ink);
   }
   .topbar {
-    background: var(--navy-900);
-    color: #c9cfea;
+    background: var(--green-900);
+    color: var(--on-dark-soft);
     font-size: 0.85rem;
   }
   .topbar__inner {
@@ -80,7 +79,7 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    color: var(--amber-400);
+    color: var(--mustard);
     font-weight: 600;
   }
   .topbar__lic :global(svg) {
@@ -98,13 +97,12 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
-    color: var(--navy-900);
+    color: var(--green-900);
     margin-right: auto;
   }
   .brand__mark {
     width: 54px;
     height: auto;
-    filter: drop-shadow(0 2px 0 rgb(12 18 48 / 0.08));
   }
   .brand__text {
     display: flex;
@@ -113,16 +111,15 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
   }
   .brand__name {
     font-family: var(--font-display);
-    font-stretch: 78%;
-    font-weight: 900;
-    font-size: 1.55rem;
+    font-weight: 800;
+    font-size: 1.5rem;
     letter-spacing: -0.01em;
   }
   .brand__inc {
     font-size: 0.65em;
     font-weight: 700;
     margin-left: 0.25em;
-    color: var(--blue-600);
+    color: var(--rust-600);
   }
   .brand__tag {
     font-size: 0.74rem;
@@ -143,17 +140,25 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
   .menu__panel li a {
     display: block;
     padding: 0.5rem 0.85rem;
-    border-radius: 999px;
     color: var(--ink);
     text-decoration: none;
     font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .nav a {
+    position: relative;
   }
   .nav a:hover {
-    background: var(--blue-100);
+    color: var(--rust-600);
   }
-  .nav a[aria-current='page'] {
-    background: var(--navy-900);
-    color: var(--white);
+  .nav a[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: 0.6rem;
+    right: 0.6rem;
+    bottom: 0.1rem;
+    height: 6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M2 4 C 25 1, 50 5.5, 98 2' stroke='%23b1462a' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
   }
   .header-call {
     padding: 0.7rem 1.1rem;
@@ -168,10 +173,10 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     cursor: pointer;
     width: 46px;
     height: 46px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     display: grid;
     place-items: center;
-    background: var(--navy-900);
+    background: var(--green-900);
   }
   .menu summary::-webkit-details-marker {
     display: none;
@@ -183,7 +188,7 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
   .menu__bars span {
     width: 20px;
     height: 2px;
-    background: var(--white);
+    background: var(--card);
     border-radius: 2px;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
@@ -201,10 +206,10 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     right: 0;
     top: calc(100% + 12px);
     width: min(300px, calc(100vw - 32px));
-    background: var(--white);
-    border: 1px solid var(--line);
+    background: var(--card);
+    border: 2px solid var(--ink);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    box-shadow: 4px 4px 0 var(--ink);
     padding: 0.75rem;
   }
   .menu__panel ul {
@@ -213,11 +218,11 @@ const path = Astro.url.pathname.replace(/\/?$/, '/');
     padding: 0;
   }
   .menu__panel li a {
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 0.75rem 0.9rem;
   }
   .menu__panel li a[aria-current='page'] {
-    background: var(--blue-100);
+    background: var(--cream-2);
   }
   .menu__panel .btn {
     width: 100%;

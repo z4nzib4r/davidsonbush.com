@@ -3,38 +3,38 @@
 @import '@fontsource/caveat/latin-700.css';
 
 :root {
-  /* Paper & ink */
-  --cream: #f4ecdd;
-  --cream-2: #ebe0cb;
-  --card: #fbf7ee;
-  --ink: #2b2219;
-  --ink-soft: #5e5244;
-  --line: #d8c9ae;
+  /* Sky & cloud (from the truck wrap) */
+  --cloud: #f3f5fa;
+  --sky-100: #e1e9f6;
+  --card: #fdfdff;
+  --ink: #161d4a;
+  --ink-soft: #4b5378;
+  --line: #c6d1e6;
 
-  /* Brand: shop-shirt green, barn red, mustard */
-  --green-900: #1e3b2d;
-  --green-800: #284a39;
-  --green-700: #335a46;
-  --green-600: #4a7559;
-  --rust-600: #b1462a;
-  --rust-700: #8f3720;
-  --mustard: #e2a83e;
-  --mustard-dark: #c98f27;
+  /* Brand: truck navy, sky blue, lettering violet */
+  --navy-900: #141c5c;
+  --navy-800: #1c2873;
+  --navy-700: #24338a;
+  --sky-600: #2c5cb6;
+  --sky-500: #5a86d0;
+  --sky-300: #a5c4ee;
+  --violet-600: #5a3497;
+  --violet-700: #41246f;
 
-  /* Text on the dark green */
-  --on-dark: #f4ecdd;
-  --on-dark-soft: #d6cdb8;
-  --on-dark-mute: #a9a48f;
+  /* Text on navy */
+  --on-dark: #f3f5fa;
+  --on-dark-soft: #c9d3ec;
+  --on-dark-mute: #95a0c6;
 
-  /* Trade accents (muted, earthy) */
-  --water: #3b6a86;
-  --water-bg: #dde6e6;
-  --heat: #b1462a;
-  --heat-bg: #f0d9c6;
-  --cool: #3f7b7c;
-  --cool-bg: #d9e6dc;
-  --moss: #4a6b2f;
-  --boil-bg: #e2e3c6;
+  /* Trade accents */
+  --water: #2c5cb6;
+  --water-bg: #dfe8f7;
+  --heat: #b8513a;
+  --heat-bg: #f6e0d8;
+  --cool: #2f8199;
+  --cool-bg: #dcedf2;
+  --boil: #5a3497;
+  --boil-bg: #e9e1f3;
 
   --font-display: 'Bitter Variable', 'Rockwell', 'Georgia', serif;
   --font-body: 'Source Sans 3 Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -72,9 +72,9 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--cream);
+  background-color: var(--cloud);
   /* faint paper grain */
-  background-image: radial-gradient(rgb(43 34 25 / 0.035) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(22 29 74 / 0.035) 1px, transparent 1px);
   background-size: 4px 4px;
   color: var(--ink);
   font-family: var(--font-body);
@@ -90,7 +90,7 @@ img {
 }
 
 a {
-  color: var(--rust-600);
+  color: var(--violet-600);
   text-underline-offset: 3px;
 }
 
@@ -137,7 +137,7 @@ p {
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1;
-  color: var(--rust-600);
+  color: var(--violet-600);
   margin: 0 0 0.6rem;
   display: inline-block;
   transform: rotate(-2deg);
@@ -151,9 +151,9 @@ p {
 }
 
 .btn {
-  --bg: var(--rust-600);
-  --fg: var(--cream);
-  --edge: var(--rust-700);
+  --bg: var(--violet-600);
+  --fg: var(--cloud);
+  --edge: var(--violet-700);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -181,7 +181,7 @@ p {
 }
 .btn:focus-visible,
 a:focus-visible {
-  outline: 3px solid var(--mustard);
+  outline: 3px solid var(--sky-300);
   outline-offset: 3px;
 }
 .btn svg {
@@ -195,12 +195,12 @@ a:focus-visible {
   --edge: var(--ink);
 }
 .btn--ghost:hover {
-  background: rgb(43 34 25 / 0.05);
+  background: rgb(22 29 74 / 0.05);
 }
 .btn--navy {
-  --bg: var(--green-800);
-  --fg: var(--cream);
-  --edge: var(--green-900);
+  --bg: var(--navy-800);
+  --fg: var(--cloud);
+  --edge: var(--navy-900);
 }
 
 .sr-only {
@@ -220,7 +220,7 @@ a:focus-visible {
   left: 12px;
   top: -60px;
   z-index: 100;
-  background: var(--mustard);
+  background: var(--sky-300);
   color: var(--ink);
   padding: 0.6rem 1rem;
   border-radius: 8px;
@@ -232,13 +232,13 @@ a:focus-visible {
 
 /* Page hero used on inner pages */
 .page-hero {
-  background: var(--green-900);
+  background: var(--navy-900);
   color: var(--on-dark);
   padding-block: clamp(48px, 8vw, 88px) clamp(40px, 6vw, 64px);
-  border-bottom: 6px solid var(--mustard);
+  border-bottom: 6px solid var(--sky-300);
 }
 .page-hero .eyebrow {
-  color: var(--mustard);
+  color: var(--sky-300);
 }
 .page-hero h1 {
   max-width: 20ch;

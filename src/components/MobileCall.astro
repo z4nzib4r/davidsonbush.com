@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<a class="mcall" href={site.phoneHref}>
+  <Icon name="phone" />
+  <span>Call {site.phone}</span>
+</a>
+
+<style>
+  .mcall {
+    display: none;
+  }
+  @media (max-width: 640px) {
+    .mcall {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1rem;
+      border-radius: 999px;
+      background: var(--amber-400);
+      color: var(--navy-900);
+      font-family: var(--font-display);
+      font-stretch: 90%;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgb(12 18 48 / 0.35);
+    }
+    .mcall :global(svg) {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+  }
+</style>

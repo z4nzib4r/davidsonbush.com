@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import CallBand from '../components/CallBand.astro';
+import { site, team } from '../data/site';
+---
+<Base title="Our Team" description={`Meet the plumbers, HVAC and boiler technicians and office staff at ${site.name} in Athens, Ohio.`}>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Our team</p>
+      <h1>The people behind the van.</h1>
+      <p class="lede">
+        A small, local crew of technicians and office staff. When you call, you’ll talk to someone who knows the schedule — and
+        the technician who shows up knows the trade.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid">
+      {team.map((m) => (
+        <article class="card">
+          <Image src={m.photo} alt={`Portrait of ${m.name}`} width={480} height={560} fit="cover" position="top" />
+          <div class="card__body">
+            <h2>{m.name}</h2>
+            <p>{m.role}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CallBand title="Ready when you are." text="Our office manager will gladly take your call and promptly schedule a visit." />
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .card img {
+    width: 100%;
+    aspect-ratio: 6 / 7;
+    object-fit: cover;
+    object-position: top;
+  }
+  .card__body {
+    padding: 1.25rem 1.4rem 1.5rem;
+    border-top: 4px solid var(--amber-400);
+  }
+  .card h2 {
+    font-size: 1.55rem;
+    margin-bottom: 0.25rem;
+  }
+  .card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  @media (max-width: 960px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

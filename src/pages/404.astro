@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import mascot from '../assets/mascot.png';
+import { site } from '../data/site';
+---
+<Base title="Page not found">
+  <section class="page-hero nf">
+    <div class="wrap nf__inner">
+      <Image src={mascot} alt="" width={200} class="nf__mascot" />
+      <div>
+        <p class="eyebrow">404</p>
+        <h1>This page sprung a leak.</h1>
+        <p class="lede">We couldn’t find what you were looking for. Head back home, or just give us a call.</p>
+        <div class="nf__ctas">
+          <a class="btn" href="/">Back to home</a>
+          <a class="btn btn--ghost" href={site.phoneHref}><Icon name="phone" /> {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf__inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .nf__mascot {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    padding: 24px;
+    border-radius: 50%;
+    background: var(--blue-500);
+    transform: rotate(-8deg);
+  }
+  .nf__ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+</style>

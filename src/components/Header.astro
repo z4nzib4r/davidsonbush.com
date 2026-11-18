@@ -1,0 +1,253 @@
+---
+import { Image } from 'astro:assets';
+import mascot from '../assets/mascot.png';
+import Icon from './Icon.astro';
+import { site, nav } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+---
+<header class="site-header">
+  <div class="topbar">
+    <div class="wrap topbar__inner">
+      <span>Serving {site.area}</span>
+      <span class="topbar__lic"><Icon name="shield" /> Licensed · {site.license}</span>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <Image src={mascot} alt="" width={64} height={62} class="brand__mark" loading="eager" />
+      <span class="brand__text">
+        <span class="brand__name">Davidson-Bush<span class="brand__inc">Inc.</span></span>
+        <span class="brand__tag">{site.tagline}</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a class="btn header-call" href={site.phoneHref}>
+      <Icon name="phone" />
+      <span>{site.phone}</span>
+    </a>
+
+    <details class="menu">
+      <summary aria-label="Menu">
+        <span class="menu__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </summary>
+      <div class="menu__panel">
+        <ul>
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <a class="btn" href={site.phoneHref}><Icon name="phone" /> Call {site.phone}</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(250 248 243 / 0.92);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar {
+    background: var(--navy-900);
+    color: #c9cfea;
+    font-size: 0.85rem;
+  }
+  .topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.4rem;
+  }
+  .topbar__lic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--amber-400);
+    font-weight: 600;
+  }
+  .topbar__lic :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 78px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--navy-900);
+    margin-right: auto;
+  }
+  .brand__mark {
+    width: 54px;
+    height: auto;
+    filter: drop-shadow(0 2px 0 rgb(12 18 48 / 0.08));
+  }
+  .brand__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .brand__name {
+    font-family: var(--font-display);
+    font-stretch: 78%;
+    font-weight: 900;
+    font-size: 1.55rem;
+    letter-spacing: -0.01em;
+  }
+  .brand__inc {
+    font-size: 0.65em;
+    font-weight: 700;
+    margin-left: 0.25em;
+    color: var(--blue-600);
+  }
+  .brand__tag {
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.3rem;
+  }
+  .nav ul {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav a,
+  .menu__panel li a {
+    display: block;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .nav a:hover {
+    background: var(--blue-100);
+  }
+  .nav a[aria-current='page'] {
+    background: var(--navy-900);
+    color: var(--white);
+  }
+  .header-call {
+    padding: 0.7rem 1.1rem;
+  }
+
+  .menu {
+    display: none;
+    position: relative;
+  }
+  .menu summary {
+    list-style: none;
+    cursor: pointer;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--navy-900);
+  }
+  .menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .menu__bars {
+    display: grid;
+    gap: 5px;
+  }
+  .menu__bars span {
+    width: 20px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .menu[open] .menu__bars span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu[open] .menu__bars span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu[open] .menu__bars span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .menu__panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    width: min(300px, calc(100vw - 32px));
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.75rem;
+  }
+  .menu__panel ul {
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
+  }
+  .menu__panel li a {
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+  }
+  .menu__panel li a[aria-current='page'] {
+    background: var(--blue-100);
+  }
+  .menu__panel .btn {
+    width: 100%;
+  }
+
+  @media (max-width: 960px) {
+    .nav {
+      display: none;
+    }
+    .menu {
+      display: block;
+    }
+  }
+  @media (max-width: 640px) {
+    .header-call {
+      display: none;
+    }
+    .topbar__inner > span:first-child {
+      display: none;
+    }
+    .topbar__inner {
+      justify-content: center;
+    }
+    .brand__tag {
+      display: none;
+    }
+    .bar {
+      min-height: 66px;
+    }
+    .brand__mark {
+      width: 44px;
+    }
+  }
+</style>

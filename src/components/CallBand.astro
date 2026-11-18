@@ -1,0 +1,94 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Something leaking, clogged or not heating?',
+  text = 'Call the office and we’ll get a technician scheduled as quickly as we can.',
+} = Astro.props;
+---
+<section class="band">
+  <div class="wrap band__inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <a class="band__phone" href={site.phoneHref}>
+      <span class="band__icon"><Icon name="phone" /></span>
+      <span>
+        <span class="band__label">Call us</span>
+        <span class="band__num">{site.phone}</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .band {
+    background: var(--amber-400);
+    color: var(--navy-900);
+    padding-block: clamp(40px, 6vw, 64px);
+  }
+  .band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .band h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    margin-bottom: 0.3em;
+    max-width: 22ch;
+  }
+  .band p {
+    margin: 0;
+    font-size: 1.1rem;
+    max-width: 52ch;
+  }
+  .band__phone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--navy-900);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem 1.6rem 1rem 1rem;
+    border-radius: 999px;
+    transition: transform 0.15s ease;
+  }
+  .band__phone:hover {
+    transform: translateY(-2px);
+  }
+  .band__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--amber-400);
+    color: var(--navy-900);
+    display: grid;
+    place-items: center;
+  }
+  .band__icon :global(svg) {
+    width: 26px;
+    height: 26px;
+  }
+  .band__label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #c9cfea;
+  }
+  .band__num {
+    display: block;
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    line-height: 1.1;
+  }
+</style>

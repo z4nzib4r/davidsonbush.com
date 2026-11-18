@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, services } from '../data/site';
+---
+<Base title="Contact" description={`Schedule plumbing, heating, cooling or boiler service with ${site.name}. Call ${site.phone}.`}>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Contact us</p>
+      <h1>To schedule an appointment, just give us a call.</h1>
+      <p class="lede">Our office manager will gladly take your call and promptly schedule a visit for your needs.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid">
+      <a class="call" href={site.phoneHref}>
+        <span class="call__icon"><Icon name="phone" /></span>
+        <span class="call__label">Call the office</span>
+        <span class="call__num">{site.phone}</span>
+        <span class="call__hint">Tap to call on mobile</span>
+      </a>
+
+      <div class="info">
+        <div class="info__item">
+          <Icon name="mail" />
+          <div>
+            <h2>Mailing address</h2>
+            <address>
+              {site.name}<br />
+              {site.mailing.line1}<br />
+              {site.mailing.city}, {site.mailing.state} {site.mailing.zip}
+            </address>
+          </div>
+        </div>
+        <div class="info__item">
+          <Icon name="pin" />
+          <div>
+            <h2>Service area</h2>
+            <p>{site.area}.</p>
+          </div>
+        </div>
+        <div class="info__item">
+          <Icon name="shield" />
+          <div>
+            <h2>Licensed</h2>
+            <p>{site.license}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap tips">
+      <h2>Helpful to have ready when you call</h2>
+      <ol>
+        <li><strong>What’s happening</strong> — leak, no heat, no cooling, strange noise, clog.</li>
+        <li><strong>Which system</strong> — {services.map((s) => s.title.toLowerCase()).join(', ')}.</li>
+        <li><strong>Make &amp; age of the equipment</strong>, if you know it.</li>
+        <li><strong>Address &amp; best callback number</strong>.</li>
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1.5rem;
+  }
+  .call {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 320px;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(500px 300px at 100% 0%, rgb(255 255 255 / 0.35), transparent 60%),
+      var(--amber-400);
+    color: var(--navy-900);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  .call:hover {
+    transform: translateY(-3px);
+  }
+  .call__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--amber-400);
+    display: grid;
+    place-items: center;
+    margin-bottom: auto;
+  }
+  .call__icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .call__label {
+    margin-top: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+  }
+  .call__num {
+    font-family: var(--font-display);
+    font-stretch: 80%;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    line-height: 1;
+    margin: 0.3rem 0 0.5rem;
+  }
+  .call__hint {
+    font-weight: 600;
+    opacity: 0.75;
+  }
+  .info {
+    display: grid;
+    gap: 1rem;
+  }
+  .info__item {
+    display: flex;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.5rem;
+  }
+  .info__item > :global(svg) {
+    width: 28px;
+    height: 28px;
+    color: var(--blue-600);
+    flex: none;
+  }
+  .info h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .info p,
+  .info address {
+    margin: 0;
+    font-style: normal;
+    color: var(--ink-soft);
+  }
+  .tips {
+    margin-top: clamp(40px, 6vw, 72px);
+  }
+  .tips h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  .tips ol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    list-style: none;
+    counter-reset: tip;
+  }
+  .tips li {
+    counter-increment: tip;
+    background: var(--sky-50);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    color: var(--ink-soft);
+  }
+  .tips li::before {
+    content: counter(tip, decimal-leading-zero);
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--blue-600);
+    margin-bottom: 0.4rem;
+  }
+  .tips strong {
+    color: var(--ink);
+  }
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .call {
+      min-height: 260px;
+    }
+    .tips ol {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .tips ol {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CallBand from '../components/CallBand.astro';
+import { site, services } from '../data/site';
+---
+<Base title="Services" description={`Plumbing, heating, cooling and boiler service in Athens, Ohio from ${site.name}. Call ${site.phone}.`}>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h1>Behind the walls, under the sink and down in the basement.</h1>
+      <p class="lede">Residential and commercial service across plumbing, heating, cooling and boilers.</p>
+      <nav class="jump" aria-label="Jump to a service">
+        {services.map((s) => <a href={`#${s.key}`}><Icon name={s.key} /> {s.title}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap list">
+    {services.map((s, i) => (
+      <section id={s.key} class="row">
+        <div class="row__lead">
+          <span class={`row__icon row__icon--${s.key}`}><Icon name={s.key} /></span>
+          <span class="row__num">{String(i + 1).padStart(2, '0')}</span>
+        </div>
+        <div class="row__body">
+          <h2>{s.title}</h2>
+          <p class="lede">{s.blurb}</p>
+        </div>
+        <ul class="row__items">
+          {s.items.map((item) => <li><Icon name="check" /> {item}</li>)}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <section class="brands">
+    <div class="wrap brands__inner">
+      <div>
+        <p class="eyebrow">Equipment we trust</p>
+        <h2>Quality brands, installed properly.</h2>
+      </div>
+      <ul>
+        {site.brands.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CallBand title="Not sure what you need?" text="Describe the problem to our office and we’ll send the right technician." />
+</Base>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.25);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .jump a:hover {
+    background: rgb(255 255 255 / 0.1);
+  }
+  .jump :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--amber-400);
+  }
+  .list {
+    padding-block: clamp(32px, 5vw, 64px);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 120px 1.2fr 1fr;
+    gap: 2rem;
+    padding-block: clamp(32px, 5vw, 56px);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 140px;
+  }
+  .row:last-child {
+    border-bottom: 0;
+  }
+  .row__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .row__icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    background: var(--blue-100);
+    color: var(--blue-600);
+  }
+  .row__icon :global(svg) {
+    width: 38px;
+    height: 38px;
+  }
+  .row__icon--heating {
+    background: #fde7df;
+    color: #d94a20;
+  }
+  .row__icon--cooling {
+    background: #def3fc;
+    color: #1683b8;
+  }
+  .row__icon--boilers {
+    background: #e0efe6;
+    color: var(--green-700);
+  }
+  .row__num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+  .row__body h2 {
+    margin-bottom: 0.3em;
+  }
+  .row__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .row__items li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+  }
+  .row__items :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--blue-600);
+    stroke-width: 2.6;
+    flex: none;
+  }
+  .brands {
+    background: var(--sky-50);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(48px, 7vw, 80px);
+  }
+  .brands__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+  }
+  .brands h2 {
+    margin: 0;
+  }
+  .brands ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .brands li {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: 1.35rem;
+    color: var(--navy-700);
+  }
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .row__lead {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>

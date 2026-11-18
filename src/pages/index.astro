@@ -1,0 +1,602 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CallBand from '../components/CallBand.astro';
+import mascot from '../assets/mascot.png';
+import fleet from '../assets/fleet.jpg';
+import { site, services, team } from '../data/site';
+
+const problems = [
+  { title: 'The toilet overflows', text: 'Clogs, running tanks, broken flappers and worn-out wax rings.' },
+  { title: 'The water heater leaks', text: 'Repairs when it makes sense, a new Rheem when it doesn’t.' },
+  { title: 'The A/C breaks down', text: 'Diagnosis and repair for central air, so the house cools off again.' },
+];
+---
+<Base>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Athens, Ohio · {site.license}</p>
+        <h1>Plumbing, heating &amp; cooling, <span class="hl">done fast and done right.</span></h1>
+        <p class="lede">
+          Our goal is to serve you in your home and your business as fast and efficiently as possible.
+          Give us a try — you won’t be sorry you did.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn" href={site.phoneHref}><Icon name="phone" /> Call {site.phone}</a>
+          <a class="btn btn--ghost" href="/services/">See our services <Icon name="arrow" /></a>
+        </div>
+        <ul class="hero__facts">
+          <li><Icon name="check" /> Homes &amp; businesses</li>
+          <li><Icon name="check" /> Licensed in Ohio</li>
+          <li><Icon name="check" /> Local office staff answer your call</li>
+        </ul>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <div class="hero__disc"></div>
+        <Image src={mascot} alt="" width={560} class="hero__mascot" loading="eager" fetchpriority="high" />
+        <div class="hero__chips">
+          {services.map((s) => <span class={`chip chip--${s.key}`}><Icon name={s.key} /> {s.title}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="eyebrow">What we do</p>
+          <h2>Four trades. One call.</h2>
+        </div>
+        <p class="lede">
+          From a dripping faucet to a new boiler, our crew covers the systems that keep your building comfortable and running.
+        </p>
+      </div>
+      <div class="svc-grid">
+        {services.map((s) => (
+          <a class="svc" href={`/services/#${s.key}`}>
+            <span class={`svc__icon svc__icon--${s.key}`}><Icon name={s.key} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.blurb}</p>
+            <ul>
+              {s.items.slice(0, 3).map((i) => <li>{i}</li>)}
+            </ul>
+            <span class="svc__more">Learn more <Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- So the next time... -->
+  <section class="section next">
+    <div class="wrap next__grid">
+      <div>
+        <p class="eyebrow">So the next time…</p>
+        <h2>Something goes wrong at the worst possible moment.</h2>
+        <p class="lede">You don’t need to search around. Call one number and our office manager will get a visit on the schedule.</p>
+        <a class="btn btn--navy" href={site.phoneHref}><Icon name="phone" /> {site.phone}</a>
+      </div>
+      <ol class="next__list">
+        {problems.map((p, i) => (
+          <li>
+            <span class="next__num">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Fleet -->
+  <section class="fleet">
+    <Image
+      src={fleet}
+      alt="Davidson-Bush Inc. service van and utility truck parked side by side"
+      widths={[640, 1024, 1600, 2000]}
+      quality={72}
+      sizes="100vw"
+      class="fleet__img"
+    />
+    <div class="wrap fleet__card-wrap">
+      <div class="fleet__card">
+        <p class="eyebrow">Look for the van</p>
+        <h2>You’ve probably seen us around Athens.</h2>
+        <p>
+          Plumbing, heating, cooling and boilers — it’s all right there on the side of the truck. When one pulls into your
+          driveway, help has arrived.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team teaser -->
+  <section class="section">
+    <div class="wrap team">
+      <div class="team__copy">
+        <p class="eyebrow">Meet the crew</p>
+        <h2>Real people from right here in Athens.</h2>
+        <p class="lede">
+          When you call, you’ll reach our office — not a call center. Our technicians specialize in plumbing, HVAC and boilers.
+        </p>
+        <a class="btn btn--navy" href="/about/">Meet our team <Icon name="arrow" /></a>
+      </div>
+      <div class="team__faces">
+        {team.map((m) => (
+          <figure>
+            <Image src={m.photo} alt={m.name} width={220} height={220} fit="cover" position="top" />
+            <figcaption>{m.name.split(' ')[0]}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands -->
+  <section class="brands">
+    <div class="wrap brands__inner">
+      <p>We install and service equipment from brands we trust</p>
+      <ul>
+        {site.brands.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CallBand />
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 85% 30%, rgb(59 94 232 / 0.5), transparent 60%),
+      linear-gradient(180deg, var(--navy-900), var(--navy-800));
+    color: var(--white);
+    overflow: hidden;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding-block: clamp(48px, 8vw, 104px);
+  }
+  .hero .eyebrow {
+    color: var(--amber-400);
+  }
+  .hero h1 .hl {
+    color: var(--amber-400);
+  }
+  .hero .lede {
+    color: #c9cfea;
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0 1.75rem;
+  }
+  .hero__facts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    color: #e6e9f7;
+    font-weight: 600;
+  }
+  .hero__facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero__facts :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--amber-400);
+    stroke-width: 2.6;
+  }
+  .hero__art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    max-width: 520px;
+    width: 100%;
+    justify-self: center;
+  }
+  .hero__disc {
+    position: absolute;
+    inset: 6%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.35), transparent 40%),
+      linear-gradient(160deg, #6f8cff, var(--blue-600) 55%, #1d36a6);
+    box-shadow: inset 0 -20px 60px rgb(12 18 48 / 0.35), 0 30px 80px rgb(0 0 0 / 0.35);
+  }
+  .hero__mascot {
+    position: relative;
+    width: 82%;
+    filter: drop-shadow(0 18px 18px rgb(0 0 0 / 0.3));
+    animation: bob 4s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(1deg);
+    }
+  }
+  .hero__chips {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .chip {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--white);
+    color: var(--navy-900);
+    font-family: var(--font-display);
+    font-stretch: 90%;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 0.45rem 0.85rem 0.45rem 0.55rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+  }
+  .chip :global(svg) {
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--blue-600);
+  }
+  .chip--plumbing {
+    top: 8%;
+    left: -2%;
+  }
+  .chip--heating {
+    top: 22%;
+    right: -4%;
+  }
+  .chip--heating :global(svg) {
+    color: #e5562b;
+  }
+  .chip--cooling {
+    bottom: 18%;
+    left: -6%;
+  }
+  .chip--cooling :global(svg) {
+    color: #1a9bd6;
+  }
+  .chip--boilers {
+    bottom: 4%;
+    right: 4%;
+  }
+  .chip--boilers :global(svg) {
+    color: var(--green-700);
+  }
+
+  /* Section head */
+  .head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 3rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+  .head h2 {
+    margin: 0;
+  }
+  .head .lede {
+    margin: 0;
+  }
+
+  /* Services */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .svc {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.6rem;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .svc:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--blue-100);
+  }
+  .svc__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: var(--blue-100);
+    color: var(--blue-600);
+    margin-bottom: 1.25rem;
+  }
+  .svc__icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .svc__icon--heating {
+    background: #fde7df;
+    color: #d94a20;
+  }
+  .svc__icon--cooling {
+    background: #def3fc;
+    color: #1683b8;
+  }
+  .svc__icon--boilers {
+    background: #e0efe6;
+    color: var(--green-700);
+  }
+  .svc h3 {
+    margin-bottom: 0.4rem;
+    font-size: 1.6rem;
+  }
+  .svc p {
+    color: var(--ink-soft);
+  }
+  .svc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.98rem;
+  }
+  .svc li {
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  .svc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber-500);
+  }
+  .svc__more {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    color: var(--blue-600);
+  }
+  .svc__more :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform 0.2s ease;
+  }
+  .svc:hover .svc__more :global(svg) {
+    transform: translateX(4px);
+  }
+
+  /* Next time */
+  .next {
+    background: var(--sky-50);
+    border-block: 1px solid var(--line);
+  }
+  .next__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .next__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .next__list li {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.5rem;
+  }
+  .next__num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-stretch: 80%;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--blue-600);
+  }
+  .next__list h3 {
+    margin-bottom: 0.25rem;
+  }
+  .next__list p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Fleet */
+  .fleet {
+    position: relative;
+    background: var(--navy-900);
+  }
+  .fleet__img {
+    width: 100%;
+    height: clamp(380px, 52vw, 620px);
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  .fleet__card-wrap {
+    position: absolute;
+    inset: auto 0 clamp(24px, 4vw, 48px) 0;
+  }
+  .fleet__card {
+    max-width: 480px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    box-shadow: var(--shadow);
+  }
+  .fleet__card p:last-child {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Team teaser */
+  .team {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .team__faces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .team__faces figure {
+    margin: 0;
+    position: relative;
+  }
+  .team__faces img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+  }
+  .team__faces figure:nth-child(even) {
+    transform: translateY(1.5rem);
+  }
+  .team__faces figcaption {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    background: var(--white);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  /* Brands */
+  .brands {
+    border-top: 1px solid var(--line);
+    padding-block: 2.5rem;
+  }
+  .brands__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+  }
+  .brands p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .brands ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.5rem;
+  }
+  .brands li {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: 1.5rem;
+    color: var(--navy-700);
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 860px) {
+    .hero__grid,
+    .next__grid,
+    .team,
+    .head {
+      grid-template-columns: 1fr;
+    }
+    .hero__art {
+      max-width: 380px;
+      order: -1;
+    }
+    .head {
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .svc-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero__art {
+      max-width: 300px;
+    }
+    .chip {
+      font-size: 0.8rem;
+    }
+    .chip--cooling {
+      left: -2%;
+    }
+    .chip--heating {
+      right: -2%;
+    }
+    .fleet__card-wrap {
+      position: static;
+      margin-top: -4rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .fleet__img {
+      height: 300px;
+    }
+    .team__faces {
+      gap: 0.6rem;
+    }
+    .team__faces figure:nth-child(even) {
+      transform: none;
+    }
+    .team__faces figcaption {
+      font-size: 0.75rem;
+      left: 0.35rem;
+      bottom: 0.35rem;
+      padding: 0.1rem 0.5rem;
+    }
+    .brands li {
+      font-size: 1.25rem;
+    }
+  }
+</style>

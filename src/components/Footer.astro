@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import mascot from '../assets/mascot.png';
+import Icon from './Icon.astro';
+import { site, nav, services } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <Image src={mascot} alt="" width={96} height={94} class="footer__mark" />
+      <p class="footer__name">{site.name}</p>
+      <p>{site.tagline}<br />Serving {site.area}.</p>
+      <p class="footer__lic"><Icon name="shield" /> {site.license}</p>
+    </div>
+    <div>
+      <h2 class="footer__h">Pages</h2>
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer__h">Services</h2>
+      <ul>
+        {services.map((s) => <li><a href={`/services/#${s.key}`}>{s.title}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer__h">Get in touch</h2>
+      <ul class="footer__contact">
+        <li><Icon name="phone" /><a href={site.phoneHref}>{site.phone}</a></li>
+        <li>
+          <Icon name="mail" />
+          <span>Mailing address<br />{site.mailing.line1}<br />{site.mailing.city}, {site.mailing.state} {site.mailing.zip}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <span>© {year} {site.name}. All rights reserved.</span>
+    <span>Proud to install {site.brands.join(', ').replace(/, ([^,]*)$/, ' & $1')}.</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--navy-900);
+    color: #c9cfea;
+    padding-top: clamp(48px, 7vw, 80px);
+    font-size: 0.98rem;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+    gap: 2.5rem;
+  }
+  .footer__mark {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+    padding: 10px;
+    border-radius: 50%;
+    background: var(--blue-500);
+    margin-bottom: 1rem;
+  }
+  .footer__name {
+    font-family: var(--font-display);
+    font-stretch: 80%;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .footer__lic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--amber-400);
+    font-weight: 600;
+  }
+  .footer :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+  }
+  .footer__h {
+    font-size: 0.8rem;
+    font-stretch: 100%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  a {
+    color: #e6e9f7;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--amber-400);
+    text-decoration: underline;
+  }
+  .footer__contact li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .footer__contact :global(svg) {
+    margin-top: 0.25rem;
+    color: var(--amber-400);
+  }
+  .footer__contact a {
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .footer__base {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+    margin-top: 3rem;
+    padding-block: 1.5rem 6rem;
+    font-size: 0.88rem;
+    color: #9aa2c6;
+  }
+  @media (min-width: 641px) {
+    .footer__base {
+      padding-bottom: 1.5rem;
+    }
+  }
+  @media (max-width: 860px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 480px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

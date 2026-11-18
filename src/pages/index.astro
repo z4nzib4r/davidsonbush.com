@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
@@ -26,7 +27,7 @@ const problems = [
         </p>
         <div class="hero__ctas">
           <a class="btn" href={site.phoneHref}><Icon name="phone" /> Call {site.phone}</a>
-          <a class="btn btn--ghost" href="/services/">See our services <Icon name="arrow" /></a>
+          <a class="btn btn--ghost" href={u('/services/')}>See our services <Icon name="arrow" /></a>
         </div>
         <ul class="hero__facts">
           <li><Icon name="check" /> Homes &amp; businesses</li>
@@ -58,7 +59,7 @@ const problems = [
       </div>
       <div class="svc-grid">
         {services.map((s) => (
-          <a class="svc" href={`/services/#${s.key}`}>
+          <a class="svc" href={u(`/services/#${s.key}`)}>
             <span class={`svc__icon svc__icon--${s.key}`}><Icon name={s.key} /></span>
             <h3>{s.title}</h3>
             <p>{s.blurb}</p>
@@ -126,7 +127,7 @@ const problems = [
         <p class="lede">
           When you call, you’ll reach our office — not a call center. Our technicians specialize in plumbing, HVAC and boilers.
         </p>
-        <a class="btn btn--navy" href="/about/">Meet our team <Icon name="arrow" /></a>
+        <a class="btn btn--navy" href={u('/about/')}>Meet our team <Icon name="arrow" /></a>
       </div>
       <div class="team__faces">
         {team.map((m) => (

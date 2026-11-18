@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import { Image } from 'astro:assets';
 import mascot from '../assets/mascot.png';
 import Icon from './Icon.astro';
@@ -16,13 +17,13 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="footer__h">Pages</h2>
       <ul>
-        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        {nav.map((n) => <li><a href={u(n.href)}>{n.label}</a></li>)}
       </ul>
     </div>
     <div>
       <h2 class="footer__h">Services</h2>
       <ul>
-        {services.map((s) => <li><a href={`/services/#${s.key}`}>{s.title}</a></li>)}
+        {services.map((s) => <li><a href={u(`/services/#${s.key}`)}>{s.title}</a></li>)}
       </ul>
     </div>
     <div>

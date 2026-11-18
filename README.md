@@ -23,4 +23,12 @@ Requires Node 22.23.4 or newer.
 
 ## Deploy
 
+### Preview on GitHub Pages
+
+Every push to `main` builds and deploys a preview with `.github/workflows/pages.yml`. The workflow sets `BASE_PATH` so the site works at `https://<user>.github.io/davidsonbush.com/`, and adds a `noindex` tag so the preview stays out of search results.
+
+One-time setup: in the repo go to **Settings → Pages → Build and deployment → Source** and pick **GitHub Actions**.
+
+### Production
+
 `npm run build` produces plain static files in `dist/`, so any static host works (Netlify, Vercel, Cloudflare Pages, GitHub Pages, or a regular web server).

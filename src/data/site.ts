@@ -80,10 +80,10 @@ import dave from '../assets/team/dave-mayes.jpg';
 import justin from '../assets/team/justin-pinkerton.jpg';
 
 export const team = [
-  { name: 'Charles Lantz', role: 'Manager & Lead HVAC, Boiler and Electronics Technician', photo: charles },
-  { name: 'Tammie Linton', role: 'Office Manager & Coordinator', photo: tammie },
-  { name: 'Sharon Young', role: 'Company Accountant & H/R', photo: sharon },
-  { name: 'Ben Simmons', role: 'Lead Plumbing Specialist', photo: ben },
-  { name: 'Dave Mayes', role: 'Plumbing Technician’s Assistant', photo: dave },
-  { name: 'Justin Pinkerton', role: 'HVAC Technician’s Assistant', photo: justin },
+  { name: 'Charles Lantz', short: 'Manager · Lead HVAC Tech', role: 'Manager & Lead HVAC, Boiler and Electronics Technician', photo: charles },
+  { name: 'Tammie Linton', short: 'Office Manager', role: 'Office Manager & Coordinator', photo: tammie },
+  { name: 'Sharon Young', short: 'Accountant & H/R', role: 'Company Accountant & H/R', photo: sharon },
+  { name: 'Ben Simmons', short: 'Lead Plumbing Specialist', role: 'Lead Plumbing Specialist', photo: ben },
+  { name: 'Dave Mayes', short: 'Plumbing Tech Assistant', role: 'Plumbing Technician’s Assistant', photo: dave },
+  { name: 'Justin Pinkerton', short: 'HVAC Tech Assistant', role: 'HVAC Technician’s Assistant', photo: justin },
 ];
